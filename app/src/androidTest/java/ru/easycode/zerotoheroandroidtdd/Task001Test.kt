@@ -1,6 +1,7 @@
 package ru.easycode.zerotoheroandroidtdd
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -20,7 +21,8 @@ class Task001Test {
 
     @Test
     fun test_change_text() {
-        onView(withText("Hello World!")).check(doesNotExist())
+        onView(withText("Hello World!!")).check(doesNotExist())
+        onView(withText("Hello World!")).perform(ViewActions.click())
         onView(withText("I am an Android Developer!")).check(matches(isDisplayed()))
     }
 }
