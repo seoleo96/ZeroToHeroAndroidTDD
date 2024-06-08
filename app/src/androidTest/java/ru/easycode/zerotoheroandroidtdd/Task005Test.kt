@@ -4,6 +4,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.PositionAssertions.isCompletelyBelow
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
@@ -14,7 +15,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.hamcrest.Matchers.allOf
-import org.junit.Assert.*
+import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,5 +47,24 @@ class Task005Test {
                 withParent(withId(R.id.rootLayout))
             )
         ).check(isCompletelyBelow(withId(R.id.titleTextView)))
+
+        onView(
+            allOf(
+                withId(R.id.changeButton),
+                withText("change"),
+                isAssignableFrom(Button::class.java),
+                withParent(isAssignableFrom(LinearLayout::class.java)),
+                withParent(withId(R.id.rootLayout))
+            )
+        ).perform(click())
+        onView(
+            allOf(
+                isAssignableFrom(TextView::class.java),
+                withId(R.id.titleTextView),
+                withText("I am an Android Developer!"),
+                withParent(isAssignableFrom(LinearLayout::class.java)),
+                withParent(withId(R.id.rootLayout))
+            )
+        ).check(matches(not(isDisplayed())))
     }
 }
