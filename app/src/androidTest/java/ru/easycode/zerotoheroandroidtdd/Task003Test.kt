@@ -1,6 +1,7 @@
 package ru.easycode.zerotoheroandroidtdd
 
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
@@ -11,7 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.hamcrest.Matchers.allOf
-import org.junit.Assert.*
+import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,8 +28,15 @@ class Task003Test {
         onView(
             allOf(
                 withId(R.id.titleTextView),
-                withText("I am an Android Developer!"),
+                withText("Hello World!"),
                 withParent(isAssignableFrom(LinearLayout::class.java))
+            )
+        ).check(matches(isDisplayed()))
+        onView(
+            allOf(
+                withId(R.id.titleTextView),
+                withText("Hello World!"),
+                withParent(not(isAssignableFrom(ConstraintLayout::class.java)))
             )
         ).check(matches(isDisplayed()))
     }
