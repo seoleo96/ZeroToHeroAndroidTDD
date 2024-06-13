@@ -25,10 +25,10 @@ interface Count {
             val numInt = number.toInt()
             val result = numInt + step
             val resultString = result.toString()
-            if (result + step > max) {
-                return UiState.Max(text = resultString)
+            if (result + step <= max) {
+                return UiState.Base(text = resultString)
             }
-            return UiState.Base(text = resultString)
+            return UiState.Max(text = resultString)
         }
     }
 }

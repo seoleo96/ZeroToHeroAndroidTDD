@@ -14,6 +14,7 @@ class CountTest {
         val count: Count = Count.Base(step = 5, max = 10)
 
         var actual: UiState = count.increment(number = "0")
+        print("actual - $actual")
         var expected: UiState = UiState.Base(text = "5")
         assertEquals(expected, actual)
 
