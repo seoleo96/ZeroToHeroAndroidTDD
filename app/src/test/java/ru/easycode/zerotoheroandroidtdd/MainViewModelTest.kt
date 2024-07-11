@@ -38,7 +38,7 @@ class MainViewModelTest {
             repository = repository
         )
         viewModel.load()
-        liveDataWrapper.checkUpdateCalls(listOf(UiState.ShowProgress, UiState.ShowData))
+        liveDataWrapper.checkUpdateCalls(listOf(Init, Loading, Loaded))
         repository.checkLoadCalledTimes(1)
     }
 }
